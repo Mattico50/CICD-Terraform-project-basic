@@ -13,11 +13,11 @@ variable "iam_role_name" {
   description = "iam role name to attach to the instance profile"
 }
 
-variable "key_pair_name" {
-  type        = string
-  description = "keypair to utilize"
-
-}
+#variable "key_pair_name" {
+#  type        = string
+#  description = "keypair to utilize"
+#
+#}
 
 resource "aws_security_group" "ec2_sg" {
   name        = join("", [var.name, "-", "ec2-sg"])
@@ -70,7 +70,7 @@ resource "aws_iam_instance_profile" "instance_profile" {
 resource "aws_instance" "web_server" {
   ami                    = "ami-0b0dcb5067f052a63"
   instance_type          = "t2.micro"
-  key_name               = var.key_pair_name
+#  key_name               = var.key_pair_name
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   user_data              = file("scripts/userdata.sh")
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
