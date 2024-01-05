@@ -13,7 +13,11 @@ variable "iam_role_name" {
   description = "iam role name to attach to the instance profile"
 }
 
-
+#variable "key_pair_name" {
+#  type        = string
+#  description = "keypair to utilize"
+#
+#}
 
 resource "aws_security_group" "ec2_sg" {
   name        = join("", [var.name, "-", "ec2-sg"])
@@ -78,5 +82,4 @@ resource "aws_instance" "web_server" {
    root_block_device {
      encrypted = true
    }
-
 }
